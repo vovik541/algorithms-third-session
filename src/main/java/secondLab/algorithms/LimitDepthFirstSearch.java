@@ -8,16 +8,18 @@ import secondLab.entity.Statistic;
 import java.util.Iterator;
 
 import static secondLab.entity.ResultCodes.*;
-import static secondLab.util.Utility.*;
-
+import static secondLab.util.Utility.createChildren;
+import static secondLab.util.Utility.createProblem;
 
 @Getter
 public class LimitDepthFirstSearch {
     private static final byte MAX_DEPTH = 8;
     private static Statistic statistic;
+    private static int iterations;
 
     public static Statistic runLimitDepthFirstSearch() {
         statistic = new Statistic();
+        iterations = 0;
 
         byte[] problem = createProblem();
         Node root = new Node(problem, (byte) 0);
@@ -27,7 +29,7 @@ public class LimitDepthFirstSearch {
         Result result = limitDepthFirstSearch.search(problem, MAX_DEPTH);
 
         statistic.setResult(result);
-
+        statistic.setIterations(iterations);
         return statistic;
     }
 
@@ -41,7 +43,7 @@ public class LimitDepthFirstSearch {
     }
 
     private Result recursiveSearch(Node parent, int limit) {
-        statistic.incrementIteration();
+        iterations++;
 
         boolean cutoffOccurred = false;
         if (parent.isSolution()) {

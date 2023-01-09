@@ -53,6 +53,7 @@ public class Utility {
             case FAILURE -> System.out.println("Failure");
             case TERMINATED -> System.out.println("Terminated");
             case SOLUTION -> {
+                System.out.println();
                 System.out.println(algorithmName + ": beginning state");
                 printBoard(statistic.getInitialStateNode());
                 System.out.println("After search run:");

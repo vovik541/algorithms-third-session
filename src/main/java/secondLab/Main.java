@@ -7,10 +7,9 @@ import static secondLab.algorithms.RecursiveBestFirstSearch.runRecursiveBestFirs
 import static secondLab.util.Utility.printResult;
 
 public class Main {
-
     public static void main(String[] args) {
         //LimitDepthFirstSearch LDFS
-//        runLDFS();
+        runLDFS();
         //LimitDepthFirstSearch RBFS R1
         runRBFS();
     }
