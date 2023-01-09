@@ -34,15 +34,15 @@ public class Utility {
 
         for (int i = 0; i < queens.length; i++) {
             for (int j = 0; j < queens[i] + 1; j++) {
-                System.out.print("_");
+                System.out.print("□ ");
             }
-            System.out.print("Q");
+            System.out.print("Q ");
             for (int j = queens[i]; j < queens.length; j++) {
-                System.out.print("_");
+                System.out.print("□ ");
             }
             System.out.println();
         }
-        System.out.println("_____");
+        System.out.println();
     }
 
     public static void handleResult(Result result) {

@@ -8,8 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import static secondLab.entity.ResultCodes.*;
-import static secondLab.util.Utility.createProblem;
-import static secondLab.util.Utility.handleResult;
+import static secondLab.util.Utility.*;
 
 
 @Getter
@@ -21,9 +20,14 @@ public class LimitDepthFirstSearch {
 
     public static void main(String[] args) {
         byte[] problem = createProblem();
+        Node root = new Node(problem, (byte) 0);
+        System.out.println("LEFS Before search");
+        printSolutionBoard(root);
 
         var limitDepthFirstSearch = new LimitDepthFirstSearch();
         Result result = limitDepthFirstSearch.search(problem, MAX_DEPTH);
+
+        System.out.println("LEFS After search");
         handleResult(result);
         System.out.println(childrenNumber);
         System.out.println(recursionNumber);
@@ -44,7 +48,6 @@ public class LimitDepthFirstSearch {
         recursionNumber++;
         boolean cutoffOccurred = false;
         if (parent.isSolution()) {
-            System.out.println("SOLUTION");
             return Result.of(SOLUTION, parent);
         } else if (parent.getDepth() == limit) {
             cutOffNum++;
