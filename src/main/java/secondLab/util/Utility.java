@@ -29,8 +29,7 @@ public class Utility {
         return queens;
     }
 
-    public static void printSolutionBoard(Node solutionNode) {
-        int temp = 0;
+    public static void printBoard(Node solutionNode) {
         byte[] queens = solutionNode.getState();
 
         for (int i = 0; i < queens.length; i++) {
@@ -46,14 +45,26 @@ public class Utility {
         System.out.println();
     }
 
-    public static void handleResult(Result result) {
-        Optional<Node> solution = result.getSolution();
+    public static void printResult(Statistic statistic, String algorithmName) {
+        Result result = statistic.getResult();
+
         switch (result.getResultCode()) {
-            case CUTOFF -> System.out.println("There is no solution on this depth level");
+            case CUT_OFF -> System.out.println("No solution using current level");
             case FAILURE -> System.out.println("Failure");
-            case NOT_SOLVABLE -> System.out.println("Not solvable");
             case TERMINATED -> System.out.println("Terminated");
-            case SOLUTION -> printSolutionBoard(solution.orElseThrow());
+            case SOLUTION -> {
+                System.out.println(algorithmName + ": beginning state");
+                printBoard(statistic.getInitialStateNode());
+                System.out.println("After search run:");
+                printBoard(result.getSolution().orElseThrow());
+                System.out.println();
+
+                System.out.println("Iterations: " + statistic.getIterations());
+                System.out.println("States created: " + statistic.getChildrenCreated());
+                System.out.println("States in memory: " + statistic.getChildrenInMemory());
+                System.out.println("The end node met: " + statistic.getEndMet());
+            }
+
             default -> throw new IllegalArgumentException("Invalid indicator");
         }
     }

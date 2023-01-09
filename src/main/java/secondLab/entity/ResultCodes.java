@@ -3,7 +3,6 @@ package secondLab.entity;
 public enum ResultCodes {
     SOLUTION,
     FAILURE,
-    CUTOFF,
+    CUT_OFF,
     TERMINATED,
-    NOT_SOLVABLE
 }

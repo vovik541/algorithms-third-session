@@ -14,21 +14,20 @@ import static secondLab.util.Utility.*;
 
 public class RecursiveBestFirstSearch {
 
-    public static Statistic statistic;
-    public static void runRecursiveBestFirstSearch() {
+    private static Statistic statistic;
+    public static Statistic runRecursiveBestFirstSearch() {
         statistic = new Statistic();
 
         byte[] problem = createProblem();
         Node root = new Node(problem, (byte) 0);
-        System.out.println("RBFS Before search");
-        printSolutionBoard(root);
-        System.out.println(root.getF());
+
+        statistic.setInitialStateNode(root);
 
         RecursiveBestFirstSearch recursiveBestFirstSearch = new RecursiveBestFirstSearch();
         Result result = recursiveBestFirstSearch.search(root, 10000);
 
-        System.out.println("RBFS After search");
-        handleResult(result);
+        statistic.setResult(result);
+        return statistic;
     }
     public Result search(Node parent, int bestStepValue) {
 
@@ -41,6 +40,7 @@ public class RecursiveBestFirstSearch {
     }
 
     private Result recursiveSearch(Node parent, int bestStepValue) {
+        statistic.incrementIteration();
 
         if (parent.isSolution())
             return Result.of(SOLUTION, parent);

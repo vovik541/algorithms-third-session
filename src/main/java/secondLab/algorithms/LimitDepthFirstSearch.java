@@ -14,21 +14,21 @@ import static secondLab.util.Utility.*;
 @Getter
 public class LimitDepthFirstSearch {
     private static final byte MAX_DEPTH = 8;
-    public static Statistic statistic;
+    private static Statistic statistic;
 
-    public static void runLimitDepthFirstSearch() {
+    public static Statistic runLimitDepthFirstSearch() {
         statistic = new Statistic();
 
         byte[] problem = createProblem();
         Node root = new Node(problem, (byte) 0);
-        System.out.println("LEFS Before search");
-        printSolutionBoard(root);
+        statistic.setInitialStateNode(root);
 
         var limitDepthFirstSearch = new LimitDepthFirstSearch();
         Result result = limitDepthFirstSearch.search(problem, MAX_DEPTH);
 
-        System.out.println("LEFS After search");
-        handleResult(result);
+        statistic.setResult(result);
+
+        return statistic;
     }
 
     public Result search(byte[] problem, int limit) {
@@ -48,7 +48,7 @@ public class LimitDepthFirstSearch {
             return Result.of(SOLUTION, parent);
         } else if (parent.getDepth() == limit) {
             statistic.incrementEndMeet();
-            return Result.of(CUTOFF, null);
+            return Result.of(CUT_OFF, null);
         } else {
             for (Iterator<Node> iterator = createChildren(parent, statistic).iterator(); iterator.hasNext(); ) {
                 Node child = iterator.next();
@@ -66,7 +66,7 @@ public class LimitDepthFirstSearch {
         }
 
         if (cutoffOccurred)
-            return Result.of(CUTOFF, null);
+            return Result.of(CUT_OFF, null);
         else
             return Result.of(FAILURE, null);
     }

@@ -1,19 +1,24 @@
 package secondLab.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class Statistic {
     private int iterations = 0;
-    private int endMeet = 0;
+    private int endMet = 0;
     private int childrenCreated = 0;
     private int childrenInMemory = 0;
+    @Setter
+    private Node initialStateNode;
+    @Setter
+    private Result result;
 
     public void incrementIteration(){
         iterations++;
     }
     public void incrementEndMeet(){
-        endMeet++;
+        endMet++;
     }
     public void incrementChildrenCreated(){
         childrenCreated++;

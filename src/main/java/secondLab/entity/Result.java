@@ -26,7 +26,7 @@ public class Result {
     }
 
     public boolean isCutOff() {
-        return resultCode.equals(CUTOFF);
+        return resultCode.equals(CUT_OFF);
     }
 
     public boolean isFailure() {
