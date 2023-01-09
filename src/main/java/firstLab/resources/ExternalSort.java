@@ -1,9 +1,6 @@
 package firstLab.resources;
 
 import java.io.*;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import static firstLab.entity.FilesProperties.DIRECT_MERGE_INPUT_PILE_PATH;
@@ -39,14 +36,13 @@ public class ExternalSort {
             writeToOriginal = !writeToOriginal;
             size *= 2;
         }
-        if (writeToOriginal)
-        {
+        if (writeToOriginal) {
             raf1.seek(0);
             raf2.seek(0);
             dos = new DataOutputStream(new BufferedOutputStream(
                     new FileOutputStream(raf1.getFD())));
             int i = 0;
-            while (i < raf2.length() / 4){
+            while (i < raf2.length() / 4) {
                 dos.writeInt(raf2.readInt());
                 i++;
             }
@@ -54,7 +50,7 @@ public class ExternalSort {
         }
     }
 
-    public static void externalSort(String f1, String f2, int size) throws Exception{
+    public static void externalSort(String f1, String f2, int size) throws Exception {
 
         RandomAccessFile raf1 = new RandomAccessFile(f1, "rw");
         RandomAccessFile raf2 = new RandomAccessFile(f2, "rw");
@@ -68,13 +64,13 @@ public class ExternalSort {
                 new FileOutputStream(raf2.getFD())));
 
         int count = 0;
-        while (count < fileByteSize){
-            for (int k = 0; k < size; ++k){
+        while (count < fileByteSize) {
+            for (int k = 0; k < size; ++k) {
                 array[k] = dis.readInt();
             }
             count += size;
             Arrays.sort(array);
-            for (int k = 0; k < size; ++k){
+            for (int k = 0; k < size; ++k) {
                 dos.writeInt(array[k]);
             }
         }
@@ -92,7 +88,7 @@ public class ExternalSort {
 
         int fileByteSize = (int) (raf.length() / 4);
         raf.seek(4 * start);
-        raf2.seek(4 *start);
+        raf2.seek(4 * start);
         DataInputStream dis = new DataInputStream(new BufferedInputStream(
                 new FileInputStream(raf.getFD())));
         DataInputStream dis3 = new DataInputStream(new BufferedInputStream(

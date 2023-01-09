@@ -12,7 +12,7 @@ public class ExternalMergeSort {
 
     public static void main(String[] args) {
         FilesProperties filesProperties = createDirectMergeInputFile();
-//        mergeSort(filesProperties);
+        mergeSort(filesProperties);
     }
 
     public static void mergeSort(FilesProperties filesProperties) {
