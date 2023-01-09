@@ -65,7 +65,6 @@ public class LimitDepthFirstSearch {
         else
             return Result.of(FAILURE, null);
     }
-
     private static LinkedList<Node> createChildren(Node parent) {
 
         byte[] state = parent.getState();

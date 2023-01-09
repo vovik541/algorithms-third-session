@@ -12,10 +12,8 @@ import static secondLab.entity.ResultCodes.SOLUTION;
 import static secondLab.util.Utility.*;
 
 public class RecursiveBestFirstSearch {
-    private static final byte MAX_DEPTH = 8;
     static int called = 0;
 
-    //    private int
     public static void main(String[] args) {
         byte[] problem = createProblem();
         Node root = new Node(problem, (byte) 0);
@@ -46,7 +44,6 @@ public class RecursiveBestFirstSearch {
         if (parent.isSolution())
             return Result.of(SOLUTION, parent);
 
-
         LinkedList<Node> children = createChildren(parent);
 
         while (true) {
@@ -67,34 +64,6 @@ public class RecursiveBestFirstSearch {
                 return result;
             }
         }
-
-
-//        List<Node> successors = node.getSuccessors();
-//        statistic.addUniqueStates(successors);
-//
-//        if (successors.isEmpty())
-//            return Result.of(Integer.MAX_VALUE, FAILURE, null);
-//
-//        for (Node successor : successors)
-//            successor.setF(max(successor.misplaced(goal) + successor.getDepth(), node.getF()));
-//
-//        while (true) {
-//            successors.sort(Comparator.comparing(Node::getF));
-//
-//            Node best = successors.get(0);
-//            if (best.getF() > fLimit)
-//                return Result.of(best.getF(), FAILURE, null);
-//
-//            Node alt = successors.get(1);
-//
-//            Result result = recursiveSearch(best, min(alt.getF(), fLimit), start);
-//            best.setF(result.getFBest());
-//
-//            if (result.hasSolution() || result.isTerminated()) {
-//                statistic.addUniqueStatesInMemory(successors);
-//                return result;
-//            }
-//        }
     }
 
     private static LinkedList<Node> createChildren(Node parent) {
