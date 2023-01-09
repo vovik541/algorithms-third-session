@@ -2,6 +2,7 @@ package secondLab.algorithms;
 
 import secondLab.entity.Node;
 import secondLab.entity.Result;
+import secondLab.entity.Statistic;
 
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -12,9 +13,11 @@ import static secondLab.entity.ResultCodes.SOLUTION;
 import static secondLab.util.Utility.*;
 
 public class RecursiveBestFirstSearch {
-    static int called = 0;
 
-    public static void main(String[] args) {
+    public static Statistic statistic;
+    public static void runRecursiveBestFirstSearch() {
+        statistic = new Statistic();
+
         byte[] problem = createProblem();
         Node root = new Node(problem, (byte) 0);
         System.out.println("RBFS Before search");
@@ -26,9 +29,7 @@ public class RecursiveBestFirstSearch {
 
         System.out.println("RBFS After search");
         handleResult(result);
-        System.out.println(called);
     }
-
     public Result search(Node parent, int bestStepValue) {
 
         Result result = recursiveSearch(parent, bestStepValue);
@@ -40,11 +41,11 @@ public class RecursiveBestFirstSearch {
     }
 
     private Result recursiveSearch(Node parent, int bestStepValue) {
-        called++;
+
         if (parent.isSolution())
             return Result.of(SOLUTION, parent);
 
-        LinkedList<Node> children = createChildren(parent);
+        LinkedList<Node> children = createChildren(parent, statistic);
 
         while (true) {
             children.sort(Comparator.comparing(Node::getStepValue));
@@ -52,6 +53,7 @@ public class RecursiveBestFirstSearch {
             Node best = children.get(0);
 
             if (best.getStepValue() > bestStepValue) {
+                statistic.incrementEndMeet();
                 return Result.of(best.getStepValue(), FAILURE, null);
             }
 
@@ -65,21 +67,4 @@ public class RecursiveBestFirstSearch {
             }
         }
     }
-
-    private static LinkedList<Node> createChildren(Node parent) {
-
-        byte[] state = parent.getState();
-        byte[] copy;
-
-        for (int i = 0; i < state.length; i++) {
-            for (int j = 1; j <= state.length - 1; j++) {
-                copy = state.clone();
-                copy[i] = (byte) ((copy[i] + j) % copy.length);
-                parent.addChild(new Node(copy, (byte) (parent.getDepth() + 1)));
-            }
-        }
-
-        return parent.getChildren();
-    }
-
 }

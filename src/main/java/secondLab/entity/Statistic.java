@@ -21,4 +21,7 @@ public class Statistic {
     public void incrementChildrenInMemory(){
         childrenInMemory++;
     }
+    public void decrementChildrenInMemory(){
+        childrenInMemory--;
+    }
 }

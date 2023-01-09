@@ -3,9 +3,9 @@ package secondLab.algorithms;
 import lombok.Getter;
 import secondLab.entity.Node;
 import secondLab.entity.Result;
+import secondLab.entity.Statistic;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 
 import static secondLab.entity.ResultCodes.*;
 import static secondLab.util.Utility.*;
@@ -14,8 +14,11 @@ import static secondLab.util.Utility.*;
 @Getter
 public class LimitDepthFirstSearch {
     private static final byte MAX_DEPTH = 8;
+    public static Statistic statistic;
 
-    public static void main(String[] args) {
+    public static void runLimitDepthFirstSearch() {
+        statistic = new Statistic();
+
         byte[] problem = createProblem();
         Node root = new Node(problem, (byte) 0);
         System.out.println("LEFS Before search");
@@ -26,7 +29,6 @@ public class LimitDepthFirstSearch {
 
         System.out.println("LEFS After search");
         handleResult(result);
-//        System.out.println(Node.);
     }
 
     public Result search(byte[] problem, int limit) {
@@ -39,14 +41,16 @@ public class LimitDepthFirstSearch {
     }
 
     private Result recursiveSearch(Node parent, int limit) {
+        statistic.incrementIteration();
 
         boolean cutoffOccurred = false;
         if (parent.isSolution()) {
             return Result.of(SOLUTION, parent);
         } else if (parent.getDepth() == limit) {
+            statistic.incrementEndMeet();
             return Result.of(CUTOFF, null);
         } else {
-            for (Iterator<Node> iterator = createChildren(parent).iterator(); iterator.hasNext(); ) {
+            for (Iterator<Node> iterator = createChildren(parent, statistic).iterator(); iterator.hasNext(); ) {
                 Node child = iterator.next();
                 Result result = recursiveSearch(child, limit);
 
@@ -56,6 +60,7 @@ public class LimitDepthFirstSearch {
                     return result;
                 }
 
+                statistic.decrementChildrenInMemory();
                 iterator.remove();
             }
         }
@@ -65,19 +70,5 @@ public class LimitDepthFirstSearch {
         else
             return Result.of(FAILURE, null);
     }
-    private static LinkedList<Node> createChildren(Node parent) {
 
-        byte[] state = parent.getState();
-        byte[] copy;
-
-        for (int i = 0; i < state.length; i++) {
-            for (int j = 1; j <= state.length - 1; j++) {
-                copy = state.clone();
-                copy[i] = (byte) ((copy[i] + j) % copy.length);
-                parent.addChild(new Node(copy, (byte) (parent.getDepth() + 1)));
-            }
-        }
-
-        return parent.getChildren();
-    }
 }

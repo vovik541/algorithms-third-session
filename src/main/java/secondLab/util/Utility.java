@@ -2,6 +2,7 @@ package secondLab.util;
 
 import secondLab.entity.Node;
 import secondLab.entity.Result;
+import secondLab.entity.Statistic;
 
 import java.util.*;
 
@@ -55,5 +56,24 @@ public class Utility {
             case SOLUTION -> printSolutionBoard(solution.orElseThrow());
             default -> throw new IllegalArgumentException("Invalid indicator");
         }
+    }
+
+    public static LinkedList<Node> createChildren(Node parent, Statistic statistic) {
+
+        byte[] state = parent.getState();
+        byte[] copy;
+
+        for (int i = 0; i < state.length; i++) {
+            for (int j = 1; j <= state.length - 1; j++) {
+                copy = state.clone();
+                copy[i] = (byte) ((copy[i] + j) % copy.length);
+                parent.addChild(new Node(copy, (byte) (parent.getDepth() + 1)));
+
+                statistic.incrementChildrenCreated();
+                statistic.incrementChildrenInMemory();
+            }
+        }
+
+        return parent.getChildren();
     }
 }
