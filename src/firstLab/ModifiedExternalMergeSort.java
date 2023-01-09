@@ -1,3 +1,5 @@
+package firstLab;
+
 public class ModifiedExternalMergeSort {
     private static Comparable[] b;      // temp array
     private static Comparable[] o;      // original array reference
