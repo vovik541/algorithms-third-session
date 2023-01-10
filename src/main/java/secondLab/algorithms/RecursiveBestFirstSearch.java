@@ -13,7 +13,7 @@ import static secondLab.entity.ResultCodes.SOLUTION;
 import static secondLab.util.Utility.*;
 
 public class RecursiveBestFirstSearch {
-
+    private static long startTime;
     private static Statistic statistic;
     public static Statistic runRecursiveBestFirstSearch() {
         statistic = new Statistic();
@@ -24,8 +24,10 @@ public class RecursiveBestFirstSearch {
         statistic.setInitialStateNode(root);
 
         RecursiveBestFirstSearch recursiveBestFirstSearch = new RecursiveBestFirstSearch();
+        startTime = System.nanoTime();
         Result result = recursiveBestFirstSearch.search(root, 10000);
 
+        statistic.setConsumedTime(startTime - System.nanoTime());
         statistic.setResult(result);
         return statistic;
     }

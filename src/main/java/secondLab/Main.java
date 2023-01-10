@@ -9,9 +9,16 @@ import static secondLab.util.Utility.printResult;
 public class Main {
     public static void main(String[] args) {
         //LimitDepthFirstSearch LDFS
-        runLDFS();
+//        runLDFS();
+
         //LimitDepthFirstSearch RBFS R1
-        runRBFS();
+//        runRBFS();
+
+        //Test LDFS
+        testLDFS();
+        //Test RBFS
+//        testRBFS();
+
     }
 
     private static void runLDFS(){
@@ -23,6 +30,22 @@ public class Main {
     private static void runRBFS(){
         Statistic statistic = runRecursiveBestFirstSearch();
         printResult(statistic, "RBFS");
+    }
+
+    private static void testLDFS(){
+//        Statistic statistic;
+//
+//        private int iterations = 0;
+//        private int endMet = 0;
+//        private int childrenCreated = 0;
+//        private int childrenInMemory = 0;
+//
+//        for (int i = 0; i < 20; i++){
+//            statistic = runLimitDepthFirstSearch();
+//        }
+    }
+    private static void testRBFS(){
+
     }
 
 }

@@ -5,8 +5,21 @@ import secondLab.entity.Result;
 import secondLab.entity.Statistic;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Utility {
+    public static final int ONE_GB_IN_BYTES = 1024 * 1024 * 1024;
+    public static final long THIRTY_MINUTES_IN_NANOSECONDS = 30 * 60000000000L;
+
+    public static boolean timeOut(long startTime) {
+        return TimeUnit.NANOSECONDS.toMinutes(System.nanoTime() - startTime) > THIRTY_MINUTES_IN_NANOSECONDS;
+    }
+
+    public static boolean memoryLimitReached() {
+        Runtime runtime = Runtime.getRuntime();
+        long usedBytes = (runtime.totalMemory() - runtime.freeMemory());
+        return usedBytes >= ONE_GB_IN_BYTES;
+    }
 
     public static byte[] createProblem() {
 
@@ -64,6 +77,8 @@ public class Utility {
                 System.out.println("States created: " + statistic.getChildrenCreated());
                 System.out.println("States in memory: " + statistic.getChildrenInMemory());
                 System.out.println("The end node met: " + statistic.getEndMet());
+                double seconds = TimeUnit.MILLISECONDS.convert(statistic.getConsumedTime(), TimeUnit.NANOSECONDS) / 1000.0;
+                System.out.println("Worked for " + Math.abs(seconds) + " seconds");
             }
 
             default -> throw new IllegalArgumentException("Invalid indicator");

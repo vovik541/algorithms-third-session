@@ -12,6 +12,9 @@ public class Statistic {
     private int childrenInMemory = 0;
 
     @Setter
+    private long consumedTime;
+
+    @Setter
     private Node initialStateNode;
     @Setter
     private Result result;
