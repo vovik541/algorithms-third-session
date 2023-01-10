@@ -17,9 +17,9 @@ public class Main {
 //        runRBFS();
 
         //Test LDFS
-        testLDFS();
+//        testLDFS();
         //Test RBFS
-//        testRBFS();
+        testRBFS();
 
     }
 
@@ -65,7 +65,33 @@ public class Main {
     }
 
     private static void testRBFS() {
+        Statistic statistic;
 
+        long iterations = 0;
+        long endMet = 0;
+        long childrenCreated = 0;
+        long childrenInMemory = 0;
+
+        for (int i = 0; i < 20; i++) {
+            System.out.println("Execution: " + (i + 1));
+            statistic = runRecursiveBestFirstSearch();
+            iterations += 0.05 * statistic.getIterations();
+            endMet += 0.05 * statistic.getEndMet();
+            childrenCreated += 0.05 * statistic.getChildrenCreated();
+            childrenInMemory += 0.05 * statistic.getChildrenInMemory();
+
+            System.out.println("initial state" + Arrays.toString(statistic.getInitialStateNode().getState()));
+            System.out.println("Iterations: " + statistic.getIterations());
+            System.out.println("States created: " + statistic.getChildrenCreated());
+            System.out.println("States in memory: " + statistic.getChildrenInMemory());
+            System.out.println("The end node met: " + statistic.getEndMet());
+        }
+
+        System.out.println("RBFS average statistic");
+        System.out.println("Iterations: " + iterations);
+        System.out.println("States created: " + childrenCreated);
+        System.out.println("States in memory: " + childrenInMemory);
+        System.out.println("The end node met: " + endMet);
     }
 
 }
