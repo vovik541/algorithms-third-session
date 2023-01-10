@@ -77,5 +77,4 @@ public class LimitDepthFirstSearch {
         else
             return Result.of(FAILURE, null);
     }
-
 }
