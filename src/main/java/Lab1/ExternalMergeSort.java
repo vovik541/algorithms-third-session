@@ -1,12 +1,12 @@
-package firstLab;
+package Lab1;
 
-import firstLab.entity.FilesProperties;
+import Lab1.entity.FilesProperties;
 
 import java.io.*;
 import java.util.Scanner;
 
-import static firstLab.entity.FilesProperties.*;
-import static firstLab.modules.FileManager.*;
+import static Lab1.entity.FilesProperties.*;
+import static Lab1.modules.FileManager.*;
 
 public class ExternalMergeSort {
 

@@ -1,14 +1,14 @@
-package secondLab.algorithms;
+package Lab2.algorithms;
 
 import lombok.Getter;
-import secondLab.entity.Node;
-import secondLab.entity.Result;
-import secondLab.entity.Statistic;
+import Lab2.entity.Node;
+import Lab2.entity.Result;
+import Lab2.entity.Statistic;
 
 import java.util.Iterator;
 
-import static secondLab.entity.ResultCodes.*;
-import static secondLab.util.Utility.*;
+import static Lab2.entity.ResultCodes.*;
+import static Lab2.util.Utility.*;
 
 @Getter
 public class LimitDepthFirstSearch {

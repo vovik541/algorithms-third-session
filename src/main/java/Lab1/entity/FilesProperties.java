@@ -1,4 +1,4 @@
-package firstLab.entity;
+package Lab1.entity;
 
 import java.nio.file.Paths;
 

@@ -1,9 +1,9 @@
-package firstLab.resources;
+package Lab1.resources;
 
 import java.io.*;
 import java.util.Arrays;
 
-import static firstLab.entity.FilesProperties.DIRECT_MERGE_INPUT_PILE_PATH;
+import static Lab1.entity.FilesProperties.DIRECT_MERGE_INPUT_PILE_PATH;
 
 public class ExternalSort {
 

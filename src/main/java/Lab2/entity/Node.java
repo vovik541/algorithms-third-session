@@ -1,4 +1,4 @@
-package secondLab.entity;
+package Lab2.entity;
 
 
 import lombok.EqualsAndHashCode;

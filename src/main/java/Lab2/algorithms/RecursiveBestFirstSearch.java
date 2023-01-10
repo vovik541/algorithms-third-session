@@ -1,16 +1,16 @@
-package secondLab.algorithms;
+package Lab2.algorithms;
 
-import secondLab.entity.Node;
-import secondLab.entity.Result;
-import secondLab.entity.Statistic;
+import Lab2.entity.Node;
+import Lab2.entity.Result;
+import Lab2.entity.Statistic;
 
 import java.util.Comparator;
 import java.util.LinkedList;
 
 import static java.lang.Math.min;
-import static secondLab.entity.ResultCodes.FAILURE;
-import static secondLab.entity.ResultCodes.SOLUTION;
-import static secondLab.util.Utility.*;
+import static Lab2.entity.ResultCodes.FAILURE;
+import static Lab2.entity.ResultCodes.SOLUTION;
+import static Lab2.util.Utility.*;
 
 public class RecursiveBestFirstSearch {
     private static long startTime;

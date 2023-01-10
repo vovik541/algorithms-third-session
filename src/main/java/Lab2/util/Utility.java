@@ -1,8 +1,8 @@
-package secondLab.util;
+package Lab2.util;
 
-import secondLab.entity.Node;
-import secondLab.entity.Result;
-import secondLab.entity.Statistic;
+import Lab2.entity.Node;
+import Lab2.entity.Result;
+import Lab2.entity.Statistic;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;

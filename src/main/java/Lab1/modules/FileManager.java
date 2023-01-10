@@ -1,6 +1,6 @@
-package firstLab.modules;
+package Lab1.modules;
 
-import firstLab.entity.FilesProperties;
+import Lab1.entity.FilesProperties;
 
 import java.io.File;
 import java.io.FileNotFoundException;

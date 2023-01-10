@@ -1,4 +1,4 @@
-package secondLab.entity;
+package Lab2.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.util.Optional;
 
 import static lombok.AccessLevel.PRIVATE;
-import static secondLab.entity.ResultCodes.*;
+import static Lab2.entity.ResultCodes.*;
 
 @Getter
 @Setter

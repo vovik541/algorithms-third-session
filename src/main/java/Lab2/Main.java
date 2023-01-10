@@ -1,12 +1,12 @@
-package secondLab;
+package Lab2;
 
-import secondLab.entity.Statistic;
+import Lab2.entity.Statistic;
 
 import java.util.Arrays;
 
-import static secondLab.algorithms.LimitDepthFirstSearch.runLimitDepthFirstSearch;
-import static secondLab.algorithms.RecursiveBestFirstSearch.runRecursiveBestFirstSearch;
-import static secondLab.util.Utility.printResult;
+import static Lab2.algorithms.LimitDepthFirstSearch.runLimitDepthFirstSearch;
+import static Lab2.algorithms.RecursiveBestFirstSearch.runRecursiveBestFirstSearch;
+import static Lab2.util.Utility.printResult;
 
 public class Main {
     public static void main(String[] args) {
