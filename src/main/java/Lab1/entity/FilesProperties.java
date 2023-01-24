@@ -4,9 +4,9 @@ import java.nio.file.Paths;
 
 public class FilesProperties {
     public static final String PROJECT_PATH = Paths.get("").toAbsolutePath().toString();
-    public static final String DIRECT_MERGE_INPUT_PILE_PATH = PROJECT_PATH + "\\src\\firstLab\\resources\\directMergeInputFile.txt";
-    public static final String DIRECT_MERGE_LEFT_FILE_PATH = PROJECT_PATH + "\\src\\firstLab\\resources\\directMergeLeftFile.txt";
-    public static final String DIRECT_MERGE_RIGHT_FILE_PATH = PROJECT_PATH + "\\src\\firstLab\\resources\\directMergeRightFile.txt";
+    public static final String DIRECT_MERGE_INPUT_PILE_PATH = PROJECT_PATH + "\\src\\main\\java\\Lab1\\resources\\directMergeInputFile.txt";
+    public static final String DIRECT_MERGE_LEFT_FILE_PATH = PROJECT_PATH + "\\src\\main\\java\\Lab1\\resources\\directMergeLeftFile.txt";
+    public static final String DIRECT_MERGE_RIGHT_FILE_PATH = PROJECT_PATH + "\\src\\main\\java\\Lab1\\resources\\directMergeRightFile.txt";
     public final int TOTAL_INPUT_ARRAY_LENGTH;
     private long leftArrayLength = 0;
     private long rightArrayLength = 0;
