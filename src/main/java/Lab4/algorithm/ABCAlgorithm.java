@@ -15,7 +15,6 @@ import static Lab4.utility.Util.createStartIndexes;
 
 @Getter
 public class ABCAlgorithm {
-
     private BeeGraph initGraph;
     private BeeGraph currentBeeGraph;
     @Setter
@@ -45,10 +44,8 @@ public class ABCAlgorithm {
 
         scoutNodes(unvisitedIndexes, scouted);
         nodesToVisit = findNodesToVisit(scouted);
-
         nodesToVisit = sortByPriority(nodesToVisit);
 
-        beeProcess:
         while (nodesToVisit.size() != 0) {
             visitingNode = nodesToVisit.poll();
 
@@ -115,7 +112,6 @@ public class ABCAlgorithm {
 
         return -1;
     }
-
 
     private Optional<BeeNode> checkIfNodeDone(PriorityQueue<BeeNode> nodesToVisit, LinkedList<BeeNode> scoutedNodes) {
 
@@ -207,5 +203,4 @@ public class ABCAlgorithm {
             ++foundNodesNumber;
         }
     }
-
 }

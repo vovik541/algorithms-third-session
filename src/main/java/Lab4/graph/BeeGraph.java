@@ -43,7 +43,6 @@ public class BeeGraph {
     }
 
     private void createNodeRelations(ArrayList<BeeNode> graph) {
-
         int randomizedDegree;
         int randomRightNodeIndex;
         BeeNode leftNode;
@@ -69,7 +68,6 @@ public class BeeGraph {
                     leftNode.addNeighbour(rightNode);
                     rightNode.addNeighbour(leftNode);
                     --randomizedDegree;
-
                 }
             }
         }
