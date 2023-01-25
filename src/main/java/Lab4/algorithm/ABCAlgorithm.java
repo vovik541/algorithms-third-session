@@ -2,11 +2,11 @@ package Lab4.algorithm;
 
 import Lab4.graph.BeeGraph;
 import Lab4.graph.BeeNode;
+import Lab4.utility.BeeNodeComparator;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static Lab4.utility.Constants.*;
 import static Lab4.utility.Util.createAllColors;
@@ -30,47 +30,142 @@ public class ABCAlgorithm {
     }
 
     public void runAlgorithm() {
+        int i = 0;
+
         ArrayList<Integer> unvisitedIndexes = createStartIndexes(NODES_NUMBER);
-        LinkedList<BeeNode> discoveredNodes;
-        HashMap<Integer, LinkedList<BeeNode>> nodesToVisit;
+        LinkedList<BeeNode> scouted = new LinkedList<>();
+        PriorityQueue<BeeNode> nodesToVisit;
+        Iterator<BeeNode> iterator;
+        BeeNode visitingNode;
+        BeeNode scoutedNode;
 
-        while (unvisitedIndexes.size() != 0) {
-            discoveredNodes = scoutNodes(unvisitedIndexes);
+        scoutNodes(unvisitedIndexes, scouted);
+        nodesToVisit = findNodesToVisit(scouted);
 
+        nodesToVisit = sortByPriority(nodesToVisit);
+
+        beeProcess:
+        while (scouted.size() != 0) {
+            visitingNode = nodesToVisit.poll();
+
+            paintNode(visitingNode);
+            //paint
+
+            Optional<BeeNode> done = checkIfNodeDone(nodesToVisit, scouted);
+
+            if (done.isPresent()) {
+                //paint done
+                scouted.remove(done.get());
+
+                if (unvisitedIndexes.size() != 0) {
+                    System.out.println(++i);
+                    scoutedNode = scoutNode(unvisitedIndexes, scouted);
+
+                    nodesToVisit.addAll(scoutedNode.getNeighbours());
+                    nodesToVisit = sortByPriority(nodesToVisit);
+                }
+
+                continue beeProcess;
+            }
 
         }
 
         System.out.println();
 
     }
+    private void paintNode(BeeNode node) {
 
-    private LinkedList<BeeNode> scoutNodes(ArrayList<Integer> unvisitedIndexes){
-        ArrayList<BeeNode> currentNodes = currentBeeGraph.getNodes();
-        LinkedList<BeeNode> nodesToVisit = new LinkedList<>();
+    }
 
+    private Optional<BeeNode> checkIfNodeDone(PriorityQueue<BeeNode> nodesToVisit, LinkedList<BeeNode> scoutedNodes) {
+
+        boolean isPresent;
+        for (BeeNode scouted : scoutedNodes) {
+            isPresent = false;
+            for (BeeNode toVisit : nodesToVisit) {
+                if (scouted.hasNeighbour(toVisit)) {
+                    isPresent = true;
+                }
+            }
+            if (!isPresent) {
+                return Optional.of(scouted);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    private PriorityQueue<BeeNode> findNodesToVisit(LinkedList<BeeNode> discoveredNodes) {
+        PriorityQueue<BeeNode> nodesToVisit = new PriorityQueue<>();
+
+        float pollenSum = 0;
+
+        for (BeeNode node : discoveredNodes) {
+            nodesToVisit.addAll(node.getNeighbours());
+        }
+
+        for (BeeNode node : nodesToVisit) {
+            pollenSum += node.getDegree();
+        }
+
+        for (BeeNode node : nodesToVisit) {
+            node.setPollenValue((float) node.getDegree() / pollenSum);
+        }
+
+        return nodesToVisit;
+    }
+
+    private PriorityQueue<BeeNode> sortByPriority(PriorityQueue<BeeNode> nodesToVisit) {
+        return nodesToVisit.stream().sorted(new BeeNodeComparator())
+                .collect(Collectors.toCollection(PriorityQueue::new));
+    }
+
+    private BeeNode scoutNode(ArrayList<Integer> unvisitedIndexes, LinkedList<BeeNode> scoutedNodes) {
         BeeNode richestNode;
         int foundNodesNumber;
         int random;
-        foundNodesNumber = 0;
+        int index;
 
-        if (unvisitedIndexes.size() % scouts == 0) {
+        foundNodesNumber = (NODES_NUMBER - unvisitedIndexes.size()) % 3;
+
+        if (foundNodesNumber == 0) {
             richestNode = currentBeeGraph.findRichestNode(unvisitedIndexes);
-            nodesToVisit.add(richestNode);
+            scoutedNodes.add(richestNode);
+            unvisitedIndexes.remove((Integer) richestNode.getIndex());
+            return richestNode;
+        } else {
+            random = RAND.nextInt(unvisitedIndexes.size());
+            scoutedNodes.add(currentBeeGraph.getNodes().get(unvisitedIndexes.get(random)));
+            index = unvisitedIndexes.get(random);
+            unvisitedIndexes.remove(random);
+
+            return currentBeeGraph.getNodes().get(index);
+        }
+    }
+
+    private void scoutNodes(ArrayList<Integer> unvisitedIndexes, LinkedList<BeeNode> scoutedNodes) {
+        ArrayList<BeeNode> currentNodes = currentBeeGraph.getNodes();
+
+        BeeNode richestNode;
+        int foundNodesNumber = (NODES_NUMBER - unvisitedIndexes.size()) % 3;
+        int random;
+
+        if (foundNodesNumber == 0) {
+            richestNode = currentBeeGraph.findRichestNode(unvisitedIndexes);
+            scoutedNodes.add(richestNode);
             unvisitedIndexes.remove((Integer) richestNode.getIndex());
             ++foundNodesNumber;
         }
         inside:
-        while (foundNodesNumber < scouts) {
+        while (foundNodesNumber != scouts) {
             if (unvisitedIndexes.size() == 0) {
                 break inside;
             }
             random = RAND.nextInt(unvisitedIndexes.size());
-            unvisitedIndexes.remove((Integer) random);
-            nodesToVisit.add(currentNodes.get(random));
+            scoutedNodes.add(currentNodes.get(unvisitedIndexes.get(random)));
+            unvisitedIndexes.remove(random);
             ++foundNodesNumber;
         }
-
-        return nodesToVisit;
     }
 
 }
