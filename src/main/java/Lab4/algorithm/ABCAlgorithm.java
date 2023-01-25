@@ -1,12 +1,10 @@
-package Lab4.graph;
+package Lab4.algorithm;
 
-import Lab4.entity.BeeGraph;
+import Lab4.graph.BeeGraph;
 import lombok.Getter;
 
-import java.util.ArrayList;
-
-import static Lab4.Constants.*;
-import static Lab4.Constants.MIN_NODE_DEGREE;
+import static Lab4.entity.Constants.FORAGERS_NUMBER;
+import static Lab4.entity.Constants.SCOUTS_NUMBER;
 
 @Getter
 public class ABCAlgorithm {
@@ -18,6 +16,7 @@ public class ABCAlgorithm {
     private final int scouts = SCOUTS_NUMBER;
 
     private int[] allColors;
+
     public ABCAlgorithm(BeeGraph initialGraph) {
         initGraph = initialGraph;
 
@@ -25,7 +24,7 @@ public class ABCAlgorithm {
         System.out.println();
     }
 
-    public void runAlgorithm(){
+    public void runAlgorithm() {
 
     }
 

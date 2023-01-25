@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.LinkedList;
 import java.util.List;
 
-import static Lab4.Constants.INIT_COLOR;
+import static Lab4.entity.Constants.INIT_COLOR;
 
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class BeeNode {
         this.index = index;
     }
 
-    public void addNeighbour(BeeNode neighbour){
+    public void addNeighbour(BeeNode neighbour) {
         this.neighbours.add(neighbour);
         degree++;
     }
