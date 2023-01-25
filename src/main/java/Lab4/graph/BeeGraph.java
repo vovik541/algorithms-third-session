@@ -1,11 +1,14 @@
 package Lab4.graph;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static Lab4.utility.Constants.*;
 
+@Getter
 public class BeeGraph {
     private ArrayList<BeeNode> nodes = new ArrayList<>();
     private int[] coloredByNodes;
@@ -99,11 +102,6 @@ public class BeeGraph {
         }
         return 0;
     }
-
-    public ArrayList<BeeNode> getNodes() {
-        return nodes;
-    }
-
     public BeeGraph deepCopy() {
         int[] coloredByCopy = coloredByNodes.clone();
         BeeGraph copy = new BeeGraph(coloredByCopy);
@@ -126,7 +124,6 @@ public class BeeGraph {
             copyNode = copyNodes.get(i);
             currentNode = this.nodes.get(i);
             copyNode.setBooked(currentNode.isBooked());
-            copyNode.setDegree(currentNode.getDegree());
             copyNode.setColor(currentNode.getColor());
 
             currentNeighbours = currentNode.getNeighbours();

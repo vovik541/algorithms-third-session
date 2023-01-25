@@ -8,7 +8,7 @@ public interface Constants {
     int SCOUTS_NUMBER = 5;
     int ITERATIONS_NUMBER = 5;
 
-    int NODES_NUMBER = 39;
+    int NODES_NUMBER = 150;
     int MIN_NODE_DEGREE = 1;
     int MAX_NODE_DEGREE = 30;
     int INIT_COLOR = -1;
