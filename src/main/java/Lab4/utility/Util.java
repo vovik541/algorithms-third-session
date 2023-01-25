@@ -3,11 +3,22 @@ package Lab4.utility;
 import Lab4.graph.BeeGraph;
 import Lab4.graph.BeeNode;
 
-import static Lab4.utility.Constants.MAX_NODE_DEGREE;
+import java.util.ArrayList;
 
 public class Util {
-    public static int[] createAllColors() {
-        int[] allColors = new int[MAX_NODE_DEGREE];
+
+    public static ArrayList<Integer> createStartIndexes(int size) {
+        ArrayList<Integer> set = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            set.add(i);
+        }
+
+        return set;
+    }
+
+    public static int[] createAllColors(int size) {
+        int[] allColors = new int[size];
 
         for (int i = 0; i < allColors.length; i++) {
             allColors[i] = i;

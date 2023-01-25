@@ -25,6 +25,19 @@ public class BeeGraph {
         this.coloredByNodes = coloredByNodes;
     }
 
+    public BeeNode findRichestNode(ArrayList<Integer> indexes) {
+        Integer bestIndex = 0;
+        int bestDegree = 0;
+
+        for (Integer index : indexes) {
+            if (nodes.get(index).getDegree() > bestDegree) {
+                bestIndex = index;
+            }
+        }
+
+        return nodes.get(bestIndex);
+    }
+
     private void fullInGraph(ArrayList<BeeNode> graph) {
         for (int i = 0; i < NODES_NUMBER; i++) {
             graph.add(new BeeNode(i));
@@ -102,6 +115,7 @@ public class BeeGraph {
         }
         return 0;
     }
+
     public BeeGraph deepCopy() {
         int[] coloredByCopy = coloredByNodes.clone();
         BeeGraph copy = new BeeGraph(coloredByCopy);
@@ -123,7 +137,7 @@ public class BeeGraph {
         for (int i = 0; i < copyNodes.size(); i++) {
             copyNode = copyNodes.get(i);
             currentNode = this.nodes.get(i);
-            copyNode.setBooked(currentNode.isBooked());
+            copyNode.setUsed(currentNode.isUsed());
             copyNode.setColor(currentNode.getColor());
 
             currentNeighbours = currentNode.getNeighbours();

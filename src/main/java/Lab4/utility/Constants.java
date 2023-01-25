@@ -3,9 +3,9 @@ package Lab4.utility;
 import java.util.Random;
 
 public interface Constants {
-
-    int FORAGERS_NUMBER = 5;
-    int SCOUTS_NUMBER = 5;
+    int TOTAL_BEES = 35;
+    int SCOUTS_NUMBER = 3;
+    int FORAGERS_NUMBER = TOTAL_BEES - SCOUTS_NUMBER;
     int ITERATIONS_NUMBER = 5;
 
     int NODES_NUMBER = 150;

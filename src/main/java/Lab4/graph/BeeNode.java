@@ -1,15 +1,13 @@
 package Lab4.graph;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import static Lab4.utility.Constants.INIT_COLOR;
 
-@Getter
-@Setter
+@Data
 public class BeeNode {
 
     private int index;
@@ -19,7 +17,7 @@ public class BeeNode {
 
     private int degree = 0;
 
-    private boolean isBooked = false;
+    private boolean isUsed = false;
 
     public BeeNode(int index) {
         this.index = index;
