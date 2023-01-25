@@ -192,11 +192,8 @@ public class ABCAlgorithm {
             unvisitedIndexes.remove((Integer) richestNode.getIndex());
             ++foundNodesNumber;
         }
-        inside:
+
         while (foundNodesNumber != scouts) {
-            if (unvisitedIndexes.size() == 0) {
-                break inside;
-            }
             random = RAND.nextInt(unvisitedIndexes.size());
             scoutedNodes.add(currentNodes.get(unvisitedIndexes.get(random)));
             unvisitedIndexes.remove(random);
