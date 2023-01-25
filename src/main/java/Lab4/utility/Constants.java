@@ -6,7 +6,7 @@ public interface Constants {
     int TOTAL_BEES = 35;
     int SCOUTS_NUMBER = 3;
     int FORAGERS_NUMBER = TOTAL_BEES - SCOUTS_NUMBER;
-    int ITERATIONS_NUMBER = 5;
+    int ITERATIONS_NUMBER = 1000;
 
     int NODES_NUMBER = 150;
     int MIN_NODE_DEGREE = 1;

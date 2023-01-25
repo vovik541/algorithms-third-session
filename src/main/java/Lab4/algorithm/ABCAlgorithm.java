@@ -4,6 +4,7 @@ import Lab4.graph.BeeGraph;
 import Lab4.graph.BeeNode;
 import Lab4.utility.BeeNodeComparator;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ public class ABCAlgorithm {
 
     private BeeGraph initGraph;
     private BeeGraph currentBeeGraph;
+    @Setter
     private BeeGraph bestBeeGraph;
     private final int foragers = FORAGERS_NUMBER;
     private final int scouts = SCOUTS_NUMBER;
@@ -35,8 +37,6 @@ public class ABCAlgorithm {
     }
 
     public void runAlgorithm() {
-        int i = 0;
-
         ArrayList<Integer> unvisitedIndexes = createStartIndexes(NODES_NUMBER);
         LinkedList<BeeNode> scouted = new LinkedList<>();
         PriorityQueue<BeeNode> nodesToVisit;
@@ -61,13 +61,11 @@ public class ABCAlgorithm {
                 scouted.remove(done.get());
 
                 if (unvisitedIndexes.size() != 0) {
-                    System.out.println(++i);
                     scoutedNode = scoutNode(unvisitedIndexes, scouted);
 
                     nodesToVisit.addAll(scoutedNode.getNeighbours());
                     nodesToVisit = sortByPriority(nodesToVisit);
                 }
-                continue beeProcess;
             }
         }
 
