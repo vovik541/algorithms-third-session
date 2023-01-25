@@ -1,4 +1,4 @@
-package Lab4.entity;
+package Lab4.utility;
 
 import java.util.Random;
 
@@ -14,5 +14,6 @@ public interface Constants {
     int INIT_COLOR = -1;
 
     Random RAND = new Random();
+
 
 }

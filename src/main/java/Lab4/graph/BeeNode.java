@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.LinkedList;
 import java.util.List;
 
-import static Lab4.entity.Constants.INIT_COLOR;
+import static Lab4.utility.Constants.INIT_COLOR;
 
 @Getter
 @Setter

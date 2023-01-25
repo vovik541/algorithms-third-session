@@ -3,8 +3,9 @@ package Lab4.algorithm;
 import Lab4.graph.BeeGraph;
 import lombok.Getter;
 
-import static Lab4.entity.Constants.FORAGERS_NUMBER;
-import static Lab4.entity.Constants.SCOUTS_NUMBER;
+import static Lab4.utility.Constants.FORAGERS_NUMBER;
+import static Lab4.utility.Constants.SCOUTS_NUMBER;
+import static Lab4.utility.Util.createAllColors;
 
 @Getter
 public class ABCAlgorithm {
@@ -18,10 +19,9 @@ public class ABCAlgorithm {
     private int[] allColors;
 
     public ABCAlgorithm(BeeGraph initialGraph) {
-        initGraph = initialGraph;
-
-        BeeGraph copy = initialGraph.deepCopy();
-        System.out.println();
+        this.initGraph = initialGraph;
+        this.currentBeeGraph = initialGraph.deepCopy();
+        this.allColors = createAllColors();
     }
 
     public void runAlgorithm() {

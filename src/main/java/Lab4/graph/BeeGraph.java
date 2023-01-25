@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static Lab4.entity.Constants.*;
+import static Lab4.utility.Constants.*;
 
 public class BeeGraph {
     private ArrayList<BeeNode> nodes = new ArrayList<>();
