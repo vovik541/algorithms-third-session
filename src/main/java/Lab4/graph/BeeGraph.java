@@ -2,27 +2,25 @@ package Lab4.graph;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static Lab4.utility.Constants.*;
 
 @Getter
 public class BeeGraph {
     private ArrayList<BeeNode> nodes = new ArrayList<>();
-    private int[] coloredByNodes;
+    private int[] paintedNodesColors;
 
     public BeeGraph() {
         fullInGraph(nodes);
         createNodeRelations(nodes);
 
-        coloredByNodes = new int[nodes.size()];
-        Arrays.fill(coloredByNodes, INIT_COLOR);
+        paintedNodesColors = new int[nodes.size()];
+        Arrays.fill(paintedNodesColors, INIT_COLOR);
     }
 
-    private BeeGraph(int[] coloredByNodes) {
-        this.coloredByNodes = coloredByNodes;
+    private BeeGraph(int[] paintedNodesColors) {
+        this.paintedNodesColors = paintedNodesColors;
     }
 
     public BeeNode findRichestNode(ArrayList<Integer> indexes) {
@@ -117,7 +115,7 @@ public class BeeGraph {
     }
 
     public BeeGraph deepCopy() {
-        int[] coloredByCopy = coloredByNodes.clone();
+        int[] coloredByCopy = paintedNodesColors.clone();
         BeeGraph copy = new BeeGraph(coloredByCopy);
         fullInGraph(copy.getNodes());
         copyRelationsTo(copy);
@@ -161,5 +159,21 @@ public class BeeGraph {
                 }
             }
         }
+    }
+
+    public void updatePaintedNodesColors() {
+        for (int i = 0; i < NODES_NUMBER; i++) {
+            paintedNodesColors[i] = nodes.get(i).getColor();
+        }
+    }
+
+    public int getChromaticNumber() {
+        Set<Integer> uniqueColors = new HashSet<>();
+
+        for (BeeNode node : nodes) {
+            uniqueColors.add(node.getColor());
+        }
+
+        return uniqueColors.size();
     }
 }

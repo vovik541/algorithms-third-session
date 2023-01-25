@@ -1,6 +1,5 @@
 package Lab4.graph;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

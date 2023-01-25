@@ -20,13 +20,18 @@ public class ABCAlgorithm {
     private BeeGraph bestBeeGraph;
     private final int foragers = FORAGERS_NUMBER;
     private final int scouts = SCOUTS_NUMBER;
-
     private int[] allColors;
+    private LinkedList<Integer> usedColors = new LinkedList<>();
 
     public ABCAlgorithm(BeeGraph initialGraph) {
         this.initGraph = initialGraph;
         this.currentBeeGraph = initialGraph.deepCopy();
         this.allColors = createAllColors(MAX_NODE_DEGREE);
+    }
+
+    public void resetAlgorithm() {
+        this.currentBeeGraph = initGraph.deepCopy();
+        this.usedColors = new LinkedList<>();
     }
 
     public void runAlgorithm() {
@@ -35,7 +40,6 @@ public class ABCAlgorithm {
         ArrayList<Integer> unvisitedIndexes = createStartIndexes(NODES_NUMBER);
         LinkedList<BeeNode> scouted = new LinkedList<>();
         PriorityQueue<BeeNode> nodesToVisit;
-        Iterator<BeeNode> iterator;
         BeeNode visitingNode;
         BeeNode scoutedNode;
 
@@ -45,16 +49,15 @@ public class ABCAlgorithm {
         nodesToVisit = sortByPriority(nodesToVisit);
 
         beeProcess:
-        while (scouted.size() != 0) {
+        while (nodesToVisit.size() != 0) {
             visitingNode = nodesToVisit.poll();
 
             paintNode(visitingNode);
-            //paint
 
             Optional<BeeNode> done = checkIfNodeDone(nodesToVisit, scouted);
 
             if (done.isPresent()) {
-                //paint done
+                paintNode(done.get());
                 scouted.remove(done.get());
 
                 if (unvisitedIndexes.size() != 0) {
@@ -64,18 +67,57 @@ public class ABCAlgorithm {
                     nodesToVisit.addAll(scoutedNode.getNeighbours());
                     nodesToVisit = sortByPriority(nodesToVisit);
                 }
-
                 continue beeProcess;
             }
-
         }
 
-        System.out.println();
-
+        currentBeeGraph.updatePaintedNodesColors();
     }
+
     private void paintNode(BeeNode node) {
+        List<BeeNode> neighbours = node.getNeighbours();
+
+        int foundColor = getAppropriateColorFromUsed(neighbours);
+
+        if (foundColor == -1) {
+            foundColor = genNewColorFromAll();
+        }
+
+        currentBeeGraph.getNodes().get(node.getIndex()).setColor(foundColor);
+    }
+
+    private int genNewColorFromAll() {
+        int random;
+
+        while (true) {
+            random = RAND.nextInt(MAX_NODE_DEGREE);
+            if (usedColors.contains(random)) {
+                continue;
+            }
+            usedColors.add(random);
+            return random;
+        }
 
     }
+
+    private int getAppropriateColorFromUsed(List<BeeNode> neighbours) {
+        boolean isSutable;
+
+        for (Integer used : usedColors) {
+            isSutable = true;
+            for (BeeNode beeNode : neighbours) {
+                if (beeNode.getColor() == used) {
+                    isSutable = false;
+                }
+            }
+            if (isSutable) {
+                return used;
+            }
+        }
+
+        return -1;
+    }
+
 
     private Optional<BeeNode> checkIfNodeDone(PriorityQueue<BeeNode> nodesToVisit, LinkedList<BeeNode> scoutedNodes) {
 

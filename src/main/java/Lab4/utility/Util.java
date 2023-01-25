@@ -47,9 +47,14 @@ public class Util {
         }
     }
 
+    public static void printGraphColorsDegrees(BeeGraph graph, String message) {
+        System.out.println(message);
+        printGraphColorsDegrees(graph);
+    }
+
     public static void printGraphColorsDegrees(BeeGraph graph) {
         int i = 0;
-        int[] colors = graph.getColoredByNodes();
+        int[] colors = graph.getPaintedNodesColors();
 
         for (int j = 0; j < colors.length; j++) {
             i++;
