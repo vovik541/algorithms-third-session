@@ -32,5 +32,6 @@ public class Main {
 
             algorithm.resetAlgorithm();
         }
+        printGraphColorsDegrees(algorithm.getBestBeeGraph(), "Best graph");
     }
 }
